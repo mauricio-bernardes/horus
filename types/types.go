@@ -5,10 +5,6 @@ type Service struct {
 	Status string `json:"status"`
 }
 
-type Data struct {
-	Data []Service `json:"data"`
-}
-
 type Subscribed struct {
 	Url   string   `json:"url"`
 	Names []string `json:"names"`

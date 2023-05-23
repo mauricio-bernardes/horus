@@ -3,14 +3,15 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"horus/storage"
-	"horus/types"
+	"horus-api/storage"
+	"horus-api/types"
 	"log"
 	"net/http"
 )
 
 func HandleSubscribe(w http.ResponseWriter, r *http.Request) {
 	var s types.Subscribed
+	fmt.Println("request", r)
 	err := json.NewDecoder(r.Body).Decode(&s)
 	if err != nil {
 		log.Println("Erro ao fazer decode do json", err.Error())
@@ -28,4 +29,8 @@ func HandleSubscribe(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("name", name)
 	}
 	http.Error(w, "Subscribe efetuado com sucesso!", http.StatusOK)
+}
+
+func HandleHealthCheck(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "OK", http.StatusOK)
 }

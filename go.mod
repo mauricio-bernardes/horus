@@ -1,4 +1,4 @@
-module horus
+module horus-api
 
 go 1.19
 

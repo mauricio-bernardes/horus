@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"horus/configs"
+	"horus-api/configs"
 
 	"github.com/go-redis/redis"
 )
@@ -32,6 +32,19 @@ func SetServiceName(service string) error {
 		// Password: conf.Password,
 	})
 	err := Redis.HSet("defense-services", service, service).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func RemoveServiceName(service string) error {
+	conf := configs.GetRedisConfig()
+	Redis = redis.NewClient(&redis.Options{
+		Addr: conf.Host + ":" + conf.Port,
+		// Password: conf.Password,
+	})
+	err := Redis.HDel("defense-services", service).Err()
 	if err != nil {
 		return err
 	}
