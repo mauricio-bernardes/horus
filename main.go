@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"horus-api/configs"
 	"horus-api/handlers"
-	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -21,8 +20,8 @@ func main() {
 	r.Post("/add", handlers.HandleInserService)
 	r.Get("/list", handlers.HandleListServices)
 	r.Delete("/remove", handlers.HandleRemoveService)
+	r.Delete("/unsubscribe", handlers.HandleUnsubscribe)
 	r.Get("/health", handlers.HandleHealthCheck)
 
 	http.ListenAndServe(fmt.Sprintf(":%s", configs.GetAPIConfig().Port), r)
-	log.Println("Server running on port", configs.GetAPIConfig().Port)
 }

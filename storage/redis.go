@@ -63,3 +63,16 @@ func SubscribeClient(url string) error {
 	}
 	return nil
 }
+
+func UnsubscribeClient(url string) error {
+	conf := configs.GetRedisConfig()
+	Redis = redis.NewClient(&redis.Options{
+		Addr: conf.Host + ":" + conf.Port,
+		// Password: conf.Password,
+	})
+	err := Redis.HDel("subscribe", url).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}
